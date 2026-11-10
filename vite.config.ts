@@ -7,11 +7,22 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+      includeAssets: [
+        "favicon.svg",
+        "favicon-96x96.png",
+        "favicon.ico",
+        "apple-touch-icon.png",
+        "safari-pinned-tab.svg",
+      ],
+      devOptions: {
+        enabled: true,
+        type: "module",
+        navigateFallback: "index.html",
+      },
       manifest: {
         name: "Muzuri Beauty",
         short_name: "Muzuri",
-        description: "Unique dresses, elegant bags, and stunning accessories.",
+        description: "If she wears Muzuri, she knows ball♥️",
         theme_color: "#e11d48",
         background_color: "#fefce8",
         display: "standalone",
@@ -20,15 +31,14 @@ export default defineConfig({
         start_url: "/",
         icons: [
           {
-            src: "/android-chrome-192x192.png",
+            src: "/web-app-manifest-192x192.png", // ✅ Updated to match your actual file
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/android-chrome-512x512.png",
+            src: "/web-app-manifest-512x512.png", // ✅ Updated to match your actual file
             sizes: "512x512",
             type: "image/png",
-            purpose: "any maskable",
           },
         ],
       },
