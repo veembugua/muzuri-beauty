@@ -14,8 +14,8 @@ const ImageUpload = ({ images, setImages }: ImageUploadProps) => {
     if (!file) return;
 
     // ⚠️ REPLACE THESE WITH YOUR CLOUDINARY DETAILS
-    const CLOUD_NAME = "YOUR_CLOUD_NAME";
-    const UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
+    const CLOUD_NAME = "tmq89g61";
+    const UPLOAD_PRESET = "muzuri_preset";
 
     const formData = new FormData();
     formData.append("file", file);
