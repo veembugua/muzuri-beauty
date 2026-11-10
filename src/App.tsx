@@ -13,6 +13,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import SeedData from "./pages/admin/SeedData";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddProduct from "./pages/admin/AddProduct";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/contact" element={<Contact />} />
 
             {/* Protected Admin Routes */}
             <Route

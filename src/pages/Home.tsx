@@ -35,7 +35,7 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-cream-50">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600"></div>
       </div>
     );
@@ -47,7 +47,7 @@ const Home = () => {
       <section className="relative bg-gradient-to-br from-rose-100 via-cream-50 to-gold-100 py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6">
-            Muzuri Beauty
+            Muzuri Beauty Closet
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
             Discover unique dresses, elegant bags, and stunning accessories that
@@ -80,45 +80,67 @@ const Home = () => {
         </section>
       )}
 
-      {/* Category Showcase */}
+      {/* ✅ UPDATED: Category Showcase with Real Images */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-12">
             Shop by Category
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Dresses Category */}
             <Link
               to="/shop?category=dresses"
-              className="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gradient-to-br from-rose-200 to-rose-400 flex items-end p-8 hover:scale-105 transition-transform"
+              className="group relative overflow-hidden rounded-xl aspect-[3/4] flex items-end p-8 hover:scale-[1.02] transition-transform duration-500 shadow-lg"
             >
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition"></div>
+              <img
+                src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80"
+                alt="Elegant Dresses"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
               <div className="relative z-10 text-white">
-                <h3 className="text-3xl font-serif font-bold mb-2">Dresses</h3>
-                <p className="text-lg">Elegant & Unique</p>
+                <h3 className="text-3xl font-serif font-bold mb-2 drop-shadow-md">
+                  Dresses
+                </h3>
+                <p className="text-lg drop-shadow-sm">Elegant & Unique</p>
               </div>
             </Link>
 
+            {/* Bags Category */}
             <Link
               to="/shop?category=bags"
-              className="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gradient-to-br from-gold-200 to-gold-400 flex items-end p-8 hover:scale-105 transition-transform"
+              className="group relative overflow-hidden rounded-xl aspect-[3/4] flex items-end p-8 hover:scale-[1.02] transition-transform duration-500 shadow-lg"
             >
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition"></div>
+              <img
+                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
+                alt="Luxury Bags"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
               <div className="relative z-10 text-white">
-                <h3 className="text-3xl font-serif font-bold mb-2">Bags</h3>
-                <p className="text-lg">Shoulder & Clutch</p>
+                <h3 className="text-3xl font-serif font-bold mb-2 drop-shadow-md">
+                  Bags
+                </h3>
+                <p className="text-lg drop-shadow-sm">Shoulder & Clutch</p>
               </div>
             </Link>
 
+            {/* Accessories Category */}
             <Link
               to="/shop?category=accessories"
-              className="group relative overflow-hidden rounded-xl aspect-[3/4] bg-gradient-to-br from-rose-300 to-gold-300 flex items-end p-8 hover:scale-105 transition-transform"
+              className="group relative overflow-hidden rounded-xl aspect-[3/4] flex items-end p-8 hover:scale-[1.02] transition-transform duration-500 shadow-lg"
             >
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition"></div>
+              <img
+                src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80"
+                alt="Stunning Accessories"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
               <div className="relative z-10 text-white">
-                <h3 className="text-3xl font-serif font-bold mb-2">
+                <h3 className="text-3xl font-serif font-bold mb-2 drop-shadow-md">
                   Accessories
                 </h3>
-                <p className="text-lg">Complete Your Look</p>
+                <p className="text-lg drop-shadow-sm">Complete Your Look</p>
               </div>
             </Link>
           </div>
@@ -126,7 +148,7 @@ const Home = () => {
       </section>
 
       {/* All Products Preview */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-cream-50">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold">

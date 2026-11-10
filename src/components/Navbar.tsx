@@ -51,6 +51,13 @@ const Navbar = () => {
               Accessories
             </Link>
 
+            <Link
+              to="/contact"
+              className="text-gray-700 hover:text-rose-600 font-medium transition"
+            >
+              Visit Us
+            </Link>
+
             <Link to="/cart" className="relative">
               <svg
                 className="w-6 h-6 text-gray-700 hover:text-rose-600 transition"
@@ -161,6 +168,15 @@ const Navbar = () => {
                 className="text-gray-700 hover:text-rose-600 font-medium py-2"
               >
                 Accessories
+              </Link>
+
+              {/* ✅ ADDED THIS LINE FOR THE MOBILE MENU */}
+              <Link
+                to="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="text-rose-600 hover:text-rose-700 font-bold py-2 border-t border-gray-100 mt-2 pt-3"
+              >
+                📍 Visit Us
               </Link>
             </div>
           </div>
