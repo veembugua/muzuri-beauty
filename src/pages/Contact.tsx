@@ -33,9 +33,9 @@ const Contact = () => {
                     Our Location
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    [Your Street Name & Building]
+                    Along Mephi Road,
                     <br />
-                    Mombasa, Kenya
+                    Kilifi, Kenya
                     <br />
                     [Postal Code]
                   </p>
@@ -55,7 +55,7 @@ const Contact = () => {
                     href="tel:+254700000000"
                     className="text-rose-600 hover:text-rose-700 font-medium transition"
                   >
-                    +254 700 000 000
+                    +254 794 372 740
                   </a>
                 </div>
               </div>

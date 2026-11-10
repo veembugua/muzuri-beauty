@@ -14,6 +14,7 @@ import SeedData from "./pages/admin/SeedData";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddProduct from "./pages/admin/AddProduct";
 import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -57,6 +58,12 @@ function App() {
             />
           </Routes>
           <Toaster position="top-right" />
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+            <p>
+              © {new Date().getFullYear()} Muzuri Beauty. All rights reserved.
+            </p>
+          </div>
+          <Footer />
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>
