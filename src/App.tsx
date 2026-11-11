@@ -76,11 +76,6 @@ function App() {
             />
           </Routes>
           <Toaster position="top-right" />
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-            <p>
-              © {new Date().getFullYear()} Muzuri Beauty. All rights reserved.
-            </p>
-          </div>
           <Footer />
         </CartProvider>
       </AuthProvider>
