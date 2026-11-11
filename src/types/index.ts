@@ -6,8 +6,8 @@ export interface Product {
   description: string;
   price: number;
   category: ProductCategory;
-  images: string[]; // URLs from Firebase Storage
-  sizes?: string[]; // For dresses: S, M, L, XL
+  images: string[];
+  sizes?: string[];
   colors?: string[];
   inStock: boolean;
   stockCount: number;
@@ -22,14 +22,23 @@ export interface CartItem {
   selectedColor?: string;
 }
 
+export interface OrderItem {
+  productId: string;
+  productName: string;
+  quantity: number;
+  price: number;
+  size?: string;
+  color?: string;
+}
+
 export interface Order {
   id: string;
-  customerName: string;
-  customerEmail: string;
-  customerPhone: string;
-  items: CartItem[];
+  customerName?: string;
+  customerEmail?: string;
+  customerPhone?: string;
+  items: OrderItem[]; // ✅ FIXED: Changed from CartItem[] to OrderItem[]
   totalAmount: number;
-  status: "pending" | "confirmed" | "shipped" | "delivered";
+  status: "pending" | "confirmed" | "shipped" | "delivered" | "completed"; // ✅ FIXED: Added 'completed'
   createdAt: Date;
   notes?: string;
 }

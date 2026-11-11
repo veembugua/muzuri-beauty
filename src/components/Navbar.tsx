@@ -50,7 +50,6 @@ const Navbar = () => {
             >
               Accessories
             </Link>
-
             <Link
               to="/contact"
               className="text-gray-700 hover:text-rose-600 font-medium transition"
@@ -133,7 +132,7 @@ const Navbar = () => {
 
         {mobileOpen && (
           <div className="md:hidden py-4 border-t border-gray-100">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 px-4">
               <Link
                 to="/"
                 onClick={() => setMobileOpen(false)}
@@ -169,8 +168,6 @@ const Navbar = () => {
               >
                 Accessories
               </Link>
-
-              {/* ✅ ADDED THIS LINE FOR THE MOBILE MENU */}
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}

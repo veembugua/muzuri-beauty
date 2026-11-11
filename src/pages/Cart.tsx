@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import toast from "react-hot-toast";
+import { createOrder } from "../services/orderService";
+import type { OrderItem } from "../types";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, totalPrice, clearCart } =
@@ -13,20 +15,37 @@ const Cart = () => {
     }).format(price);
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (cart.length === 0) {
       toast.error("Your cart is empty");
       return;
     }
 
-    // ✅ 1. SET YOUR BUSINESS WHATSAPP NUMBER HERE (Include country code, NO '+' or '00')
-    // Example for Kenya: 254712345678
     const BUSINESS_PHONE = "254794372740";
 
-    // ✅ 2. Build a clean, professional message
-    let message =
-      "Hello Muzuri Beauty! 👗 I'd like to inquire about the following items:\n\n";
+    // ✅ 1. Format items for Firestore
+    const orderItems: OrderItem[] = cart.map((item) => ({
+      productId: item.product.id,
+      productName: item.product.name,
+      quantity: item.quantity,
+      price: item.product.price,
+      size: item.selectedSize,
+      color: item.selectedColor,
+    }));
 
+    // ✅ 2. Save order to Firestore FIRST
+    try {
+      await createOrder(orderItems, totalPrice);
+      toast.success("Order recorded! Redirecting to WhatsApp...");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to record order. Please try again.");
+      return;
+    }
+
+    // ✅ 3. Build WhatsApp message
+    let message =
+      "Hello Muzuri Beauty! 👗 I would like to place an order for the following items:\n\n";
     cart.forEach((item) => {
       const itemTotal = item.product.price * item.quantity;
       message += `• *${item.product.name}*\n`;
@@ -34,16 +53,42 @@ const Cart = () => {
       if (item.selectedColor) message += `   Color: ${item.selectedColor}\n`;
       message += `   Qty: ${item.quantity} — ${formatPrice(itemTotal)}\n\n`;
     });
-
     message += `💰 *Total Amount: ${formatPrice(totalPrice)}*\n\n`;
     message +=
-      "Please confirm availability and share payment/delivery details. Thank you!";
+      "Please share the payment and delivery details so I can complete my order. Thank you!";
 
-    // ✅ 3. Add the BUSINESS_PHONE to the URL
     const whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(message)}`;
 
-    // Open in a new tab securely
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    // ✅ 4. Clear cart and redirect
+    clearCart();
+    window.location.href = whatsappUrl;
+  };
+
+  const handleCopyMessage = async () => {
+    let message =
+      "Hello Muzuri Beauty! 👗 I would like to place an order for the following items:\n\n";
+    cart.forEach((item) => {
+      const itemTotal = item.product.price * item.quantity;
+      message += `• *${item.product.name}*\n`;
+      if (item.selectedSize) message += `   Size: ${item.selectedSize}\n`;
+      if (item.selectedColor) message += `   Color: ${item.selectedColor}\n`;
+      message += `   Qty: ${item.quantity} — ${formatPrice(itemTotal)}\n\n`;
+    });
+    message += `💰 *Total Amount: ${formatPrice(totalPrice)}*\n\n`;
+    message +=
+      "Please share the payment and delivery details so I can complete my order. Thank you!";
+
+    try {
+      await navigator.clipboard.writeText(message);
+      toast.success("Order details copied! Open WhatsApp and paste.");
+    } catch {
+      toast.error("Failed to copy message");
+    }
+  };
+
+  const handleClearCart = () => {
+    clearCart();
+    toast.success("Cart cleared");
   };
 
   if (cart.length === 0) {
@@ -167,6 +212,7 @@ const Cart = () => {
                 </div>
               </div>
 
+              {/* ✅ Primary Button: Saves to Firestore, then opens WhatsApp */}
               <button
                 onClick={handleCheckout}
                 className="w-full flex items-center justify-center gap-2 py-4 bg-green-500 text-white rounded-lg font-bold text-lg hover:bg-green-600 transition shadow-md mb-3"
@@ -181,11 +227,29 @@ const Cart = () => {
                 Checkout via WhatsApp
               </button>
 
+              {/* ✅ Secondary Button: Fallback if the phone blocks the deep link */}
               <button
-                onClick={() => {
-                  clearCart();
-                  toast.success("Cart cleared");
-                }}
+                onClick={handleCopyMessage}
+                className="w-full flex items-center justify-center gap-2 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition mb-3 border border-gray-200"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                  />
+                </svg>
+                Copy Order Details
+              </button>
+
+              <button
+                onClick={handleClearCart}
                 className="w-full text-sm text-gray-600 hover:text-gray-900 py-2"
               >
                 Clear Cart

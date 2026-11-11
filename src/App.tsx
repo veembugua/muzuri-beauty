@@ -15,6 +15,8 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddProduct from "./pages/admin/AddProduct";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
+import EditProduct from "./pages/admin/EditProduct";
+import Orders from "./pages/admin/Orders";
 
 function App() {
   return (
@@ -53,6 +55,22 @@ function App() {
               element={
                 <ProtectedRoute>
                   <SeedData />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/edit-product/:id"
+              element={
+                <ProtectedRoute>
+                  <EditProduct />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/orders"
+              element={
+                <ProtectedRoute>
+                  <Orders />
                 </ProtectedRoute>
               }
             />

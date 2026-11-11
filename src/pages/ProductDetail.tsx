@@ -55,12 +55,7 @@ const ProductDetail = () => {
     toast.success(`Added ${quantity} x ${product.name} to cart!`);
   };
 
-  const handleInquiry = () => {
-    if (!product) return;
-    const message = `Hi! I'm interested in the ${product.name} (${formatPrice(product.price)}). Is it still available?`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
-  };
+  // ✅ handleInquiry function has been completely removed
 
   if (loading) {
     return (
@@ -204,22 +199,14 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <button
-                  onClick={handleAddToCart}
-                  disabled={!product.inStock}
-                  className="w-full py-4 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  🛒 Add to Cart
-                </button>
-                <button
-                  onClick={handleInquiry}
-                  disabled={!product.inStock}
-                  className="w-full py-4 border-2 border-rose-600 text-rose-600 rounded-lg font-medium hover:bg-rose-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  💬 Inquire via WhatsApp
-                </button>
-              </div>
+              {/* ✅ ONLY the Add to Cart button remains here */}
+              <button
+                onClick={handleAddToCart}
+                disabled={!product.inStock}
+                className="w-full py-4 bg-rose-600 text-white rounded-lg font-medium hover:bg-rose-700 transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                🛒 Add to Cart
+              </button>
             </div>
           </div>
         </div>

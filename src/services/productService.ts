@@ -5,11 +5,20 @@ import {
   getDoc,
   addDoc,
   deleteDoc,
+  updateDoc,
   serverTimestamp,
   type QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import type { Product, ProductCategory } from "../types";
+
+export const updateProduct = async (
+  productId: string,
+  productData: Omit<Product, "id" | "createdAt">,
+): Promise<void> => {
+  const docRef = doc(db, "products", productId);
+  await updateDoc(docRef, productData);
+};
 
 // ✅ Helper function using the official Firebase TypeScript type instead of 'any'
 const parseProduct = (doc: QueryDocumentSnapshot): Product => {
